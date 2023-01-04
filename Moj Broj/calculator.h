@@ -51,6 +51,6 @@ protected:
 
 	//---------------- Atributi ----------------
 	TokenStream ts;
-	std::stringstream ss; //Ovde smestam izraz koji racunam
+	std::istringstream ss; //Ovde smestam izraz koji racunam
 	double result;
 };

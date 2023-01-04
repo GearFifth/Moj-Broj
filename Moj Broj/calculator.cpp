@@ -49,7 +49,7 @@ Calculator::Token Calculator::TokenStream::getToken()
 	case '/':
 		return Token(tmp);
 	default:
-		error("Bad token");
+		throw std::invalid_argument("Bad token");
 		return Token();
 	}
 }
@@ -70,7 +70,7 @@ double Calculator::number()
 {
 	Token token = ts.getToken();
 	if (token.kind != '8')
-		error("Expected a number");
+		throw std::invalid_argument("Expected a number");
 	return token.value;
 }
 
@@ -138,7 +138,7 @@ double Calculator::expression()
 
 double Calculator::calculate(std::string izraz)
 {
-	ss = std::stringstream(izraz);
+	ss = std::istringstream(izraz);
 
 	try {
 		while (true) {
@@ -154,7 +154,7 @@ double Calculator::calculate(std::string izraz)
 
 			token = ts.getToken();
 			if (token.kind != ';')
-				error("Badly terminated expression");
+				throw std::invalid_argument("Badly terminated expression");
 			return lval;
 		}
 	}
