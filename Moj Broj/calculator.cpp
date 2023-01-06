@@ -63,7 +63,7 @@ void Calculator::TokenStream::putBack(Token token)
 
 
 //-------------------- KALKULATOR --------------------
-Calculator::Calculator() :result(NULL) , ss(), ts(*this) {} //konstruktor
+Calculator::Calculator() :result(NULL), ss(), ts(*this) {} //konstruktor
 
 // ----- Formalna gramatika -----
 double Calculator::number()
@@ -80,7 +80,7 @@ double Calculator::primary()
 	switch (token.kind) {
 	case '(': {
 		//u ovom slucaju rekurzivno ponovo ucitava izraz pozivom funkcije expression
-		double lval = expression(); 
+		double lval = expression();
 		token = ts.getToken();
 
 		//Obavezna provera da li se zagrada zatvorila

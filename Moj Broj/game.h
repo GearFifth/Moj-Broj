@@ -3,12 +3,15 @@
 #include <vector>
 #include <sstream>
 #include <string>
+#include <chrono>
 #include "round.h"
+#include "files.h"
 
 class Game {
 public:
 	Game(std::vector<Round> &runde);
 	void start(); //Pokrece igru
+	void dodajPobedu(Igrac igrac); //Dodaje pobedu igracu
 
 	//Getteri i setteri
 	void setRunde(std::vector<Round>& runde);

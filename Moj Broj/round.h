@@ -1,45 +1,60 @@
 #pragma once
 #include <vector>
 #include <string>
+#include <map>
+#include "calculator.h"
 
-enum Igrac {A,B};
+enum Igrac { A, B };
 
 class Round {
 public:
 	//Poslednji parametar oznacava ko prvi igra
-	Round(std::vector<int> &ponudjeniBrojevi, int &trazeniBroj, Igrac &igrac);
-	void calculateBestSolution(); //Program racuna broj
+	Round(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj, Igrac& igrac, int& brojRunde);
+	//Funkcija radi tako sto trazenjem azurira pokazivace unutar rekurzije
+	void findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj,
+		int* pronadjenaVrednost, std::string* pronadjenIzraz);
 
-	//Getteri i setteri
-	std::vector<int> getPonudjeniBrojevi();
+	bool validateInput(std::string unos); //Proverava unos korisnika
+
+	// ------------------ Getteri i setteri ------------------
+	int getBrojRunde();
+	void setBrojRunde(int br);
+
+	Igrac getPrviIgracNaPotezu();
+
+	std::vector<std::string> getPonudjeniBrojevi();
 	int getTrazeniBroj();
 
-	void setIzrazA(std::string &iz);
+	void setIzrazA(std::string& iz);
 	std::string getIzrazA();
-	void setDobijeniBrojA(double &br);
-	double getDobijeniBrojA();
+	void setDobijeniBrojA(int& br);
+	int getDobijeniBrojA();
 
-	void setIzrazB(std::string &iz);
+	void setIzrazB(std::string& iz);
 	std::string getIzrazB();
-	void setDobijeniBrojB(double &br);
-	double getDobijeniBrojB();
+	void setDobijeniBrojB(int& br);
+	int getDobijeniBrojB();
 
 	void setIzrazProg(std::string& iz);
 	std::string getIzrazProg();
-	void setDobijeniBrojProg(double &br);
-	double getDobijeniBrojProg();
+	void setDobijeniBrojProg(int& br);
+	int getDobijeniBrojProg();
+
+	Igrac getPobednik();
+	void setPobednik(Igrac pob);
 
 private:
-	std::vector<int> ponudjeniBrojevi;
+	int brojRunde;
+	std::vector<std::string> ponudjeniBrojevi;
 	int trazeniBroj;
 	Igrac prviIgracNaPotezu;
 
 	std::string izrazA;
-	double dobijeniBrojA; //Broj koji je izracunao igrac A
+	int dobijeniBrojA; //Broj koji je izracunao igrac A
 	std::string izrazB;
-	double dobijeniBrojB; //Broj koji je izracunao igrac B
+	int dobijeniBrojB; //Broj koji je izracunao igrac B
 	std::string izrazProg;
-	double dobijeniBrojProg; //Broj koji je izracunao program
+	int dobijeniBrojProg; //Broj koji je izracunao program
 
 	Igrac pobednik;
 };
