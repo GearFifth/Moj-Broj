@@ -1,25 +1,17 @@
 #include "calculator.h"
 
-//---------------------- ERRORS ----------------------
-void error(std::string error_type) {
-	std::cout << error_type << "\n";
-}
-
-void error(std::string s, std::string s1) {
-	std::cout << s + s1 << "\n";
-}
-
 //-------------------- TOKEN --------------------
-Calculator::Token::Token(char ch, double val) : kind(ch), value(val) {}
-Calculator::Token::Token(char ch) : kind(ch), value(0) {}
-Calculator::Token::Token() : kind('x'), value(0) {}
+
+template <typename T> Calculator<T>::Token::Token(char ch, T val) : kind(ch), value(val) {}
+template <typename T> Calculator<T>::Token::Token(char ch) : kind(ch), value(0) {}
+template <typename T> Calculator<T>::Token::Token() : kind('x'), value(0) {}
 
 
 
 //-------------------- TOKEN STREAM --------------------
-Calculator::TokenStream::TokenStream(Calculator& cal) : buffer(), full(false), parent(cal) {}
+template <typename T> Calculator<T>::TokenStream::TokenStream(Calculator& cal) : buffer(), full(false), parent(cal) {}
 
-Calculator::Token Calculator::TokenStream::getToken()
+template <typename T> typename Calculator<T>::Token Calculator<T>::TokenStream::getToken()
 {
 	if (full) {
 		full = false;
@@ -35,7 +27,7 @@ Calculator::Token Calculator::TokenStream::getToken()
 	case '8': case '9': case '.': {
 		parent.ss.putback(tmp);
 
-		double val;
+		T val;
 		parent.ss >> val;
 		return Token('8', val);
 	}
@@ -54,7 +46,7 @@ Calculator::Token Calculator::TokenStream::getToken()
 	}
 }
 
-void Calculator::TokenStream::putBack(Token token)
+template <typename T> void Calculator<T>::TokenStream::putBack(Token token)
 {
 	buffer = token;
 	full = true;
@@ -63,10 +55,10 @@ void Calculator::TokenStream::putBack(Token token)
 
 
 //-------------------- KALKULATOR --------------------
-Calculator::Calculator() :result(NULL), ss(), ts(*this) {} //konstruktor
+template <typename T> Calculator<T>::Calculator() :result(NULL), ss(), ts(*this) {} //konstruktor
 
 // ----- Formalna gramatika -----
-double Calculator::number()
+template <typename T> T Calculator<T>::number()
 {
 	Token token = ts.getToken();
 	if (token.kind != '8')
@@ -74,18 +66,18 @@ double Calculator::number()
 	return token.value;
 }
 
-double Calculator::primary()
+template <typename T> T Calculator<T>::primary()
 {
 	Token token = ts.getToken();
 	switch (token.kind) {
 	case '(': {
 		//u ovom slucaju rekurzivno ponovo ucitava izraz pozivom funkcije expression
-		double lval = expression();
+		T lval = expression();
 		token = ts.getToken();
 
 		//Obavezna provera da li se zagrada zatvorila
 		if (token.kind != ')')
-			error("Unmatched '('");
+			throw std::invalid_argument("Unmatched '('");
 		return lval;
 	}
 	default:
@@ -93,10 +85,9 @@ double Calculator::primary()
 		return number(); //Ucitava realan broj N
 	}
 }
-
-double Calculator::term()
+template <typename T> T Calculator<T>::term()
 {
-	double lval = primary();
+	T lval = primary();
 
 	while (true) {
 		Token token = ts.getToken();
@@ -106,7 +97,18 @@ double Calculator::term()
 			lval *= primary();
 			break;
 		case '/':
-			lval /= primary();
+			if (std::is_same<T, double>::value || std::is_same<T, float>::value) {
+				lval /= primary();
+			}
+			else if(std::is_same<T, short>::value || std::is_same<T, int>::value || std::is_same<T, long long>::value) {
+				T rval = primary();
+
+				//Ukoliko radimo sa celobrojnim vrednostima i dobijemo ostatak to je greska
+				if ((static_cast<long long>(lval) % static_cast<long long>(rval)) != 0) {
+					throw std::invalid_argument("Nedozvoljeno deljenje");
+				}
+				lval /= rval;
+			}
 			break;
 		default:
 			ts.putBack(token);
@@ -115,9 +117,9 @@ double Calculator::term()
 	}
 }
 
-double Calculator::expression()
+template <typename T> T Calculator<T>::expression()
 {
-	double lval = term();
+	T lval = term();
 
 	while (true) {
 		Token token = ts.getToken();
@@ -136,14 +138,14 @@ double Calculator::expression()
 	}
 }
 
-double Calculator::calculate(std::string izraz)
+template <typename T> T Calculator<T>::calculate(std::string izraz)
 {
 	ss = std::istringstream(izraz);
 
 	try {
 		while (true) {
 
-			double lval = 0;
+			T lval = 0;
 			//std::cout << ">";
 			Token token = ts.getToken();
 			if (token.kind == 'q')
@@ -162,5 +164,6 @@ double Calculator::calculate(std::string izraz)
 		std::cerr << e.what() << std::endl;
 		return 1;
 	}
+	return 1;
 }
 

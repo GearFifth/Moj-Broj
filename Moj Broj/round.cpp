@@ -3,7 +3,7 @@
 //Konstruktor
 Round::Round(std::vector<std::string>& ponudjeniBrojevi, int &trazeniBroj, Igrac &igrac, int &br):
 	ponudjeniBrojevi(ponudjeniBrojevi), trazeniBroj(trazeniBroj), prviIgracNaPotezu(igrac),
-	brojRunde(br), dobijeniBrojA(0), dobijeniBrojB(0), dobijeniBrojProg(0), pobednik() {}
+	brojRunde(br), dobijeniBrojA(0), dobijeniBrojB(0), dobijeniBrojProg(0), pobednik("Nema pobednika") {}
 
 
 
@@ -93,12 +93,12 @@ int Round::getDobijeniBrojProg() {
 }
 
 //Pobednik
-Igrac Round::getPobednik()
+std::string Round::getPobednik()
 {
 	return pobednik;
 }
 
-void Round::setPobednik(Igrac pob)
+void Round::setPobednik(std::string pob)
 {
 	pobednik = pob;
 }
@@ -113,7 +113,7 @@ void Round::setPobednik(Igrac pob)
 //Funkcija radi tako sto trazenjem azurira pokazivace unutar rekurzije
 void Round::findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj, int* pronadjenaVrednost, std::string* pronadjenIzraz) {
 
-	Calculator calc = Calculator();
+	Calculator calc = Calculator<double>();
 	int velicina = ponudjeniBrojevi.size();
 
 	//Pravim kombinacije i pozivam dok ne dodjem do nekog od navedenih slucajeva
@@ -149,12 +149,9 @@ void Round::findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazen
 
 				std::string newExpr = e1 + op + e2;
 
-				//if (e1 == "8" && e2 == "(1+1)") {
-				//	std::cout << newExpr << std::endl;
-				//}
-
 				num = calc.calculate(newExpr + ";q");
 
+				
 
 				//Da bi izbegli (9/4) itd.
 				if (op == '/') {
@@ -162,6 +159,10 @@ void Round::findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazen
 						if (!swap) {
 							goto SWAP;
 						}
+						continue;
+					}
+					//Jer se dobije isti broj
+					else if (e2 == "1") {
 						continue;
 					}
 				}
@@ -174,12 +175,17 @@ void Round::findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazen
 						continue;
 					}
 				}
+				//Jer se dobije isti broj
+				else if (op == '*') {
+					if (e1 == "1" || e2 == "1") {
+						continue;
+					}
+				}
 
 				//Da bi izbegli deljenje nulom
 				if (num == 0) {
 					continue;
 				}
-
 				
 				else if (num == trazeniBroj) {
 					//Postavljam resenje
@@ -236,9 +242,15 @@ bool Round::validateInput(std::string unos)
 {
 	//Mapa brojeva gde inicijalno sve postavljam na false
 	//true znaci da je broj iskoristen
-	std::map<std::string, bool> mapaBrojeva;
+	std::map<std::string, int> mapaBrojeva;
 	for (std::string broj : ponudjeniBrojevi) {
-		mapaBrojeva[broj] = false;
+		if (mapaBrojeva.find(broj) != mapaBrojeva.end()) {
+			mapaBrojeva[broj]++;
+		}
+		else {
+			mapaBrojeva[broj] = 1;
+		}
+		
 	}
 	std::string broj;
 
@@ -252,11 +264,11 @@ bool Round::validateInput(std::string unos)
 				if (mapaBrojeva.find(broj) == mapaBrojeva.end()) {
 					return false;
 				}
-				//Isti broj unet vise puta
-				else if (mapaBrojeva[broj]) {
+				//broj unet vise puta nego sto sme
+				else if (mapaBrojeva[broj] == 0) {
 					return false;
 				}
-				mapaBrojeva[broj] = true;
+				mapaBrojeva[broj]--;
 				broj = "";//clear
 			}	
 		}
@@ -269,7 +281,7 @@ bool Round::validateInput(std::string unos)
 						return false;
 					}
 					//Isti broj unet vise puta
-					else if (mapaBrojeva[broj]) {
+					else if (mapaBrojeva[broj] == 0) {
 						return false;
 					}
 				}

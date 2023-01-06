@@ -3,13 +3,15 @@
 #include <string>
 #include <map>
 #include "calculator.h"
+#include "calculator.cpp"
 
 enum Igrac { A, B };
 
 class Round {
 public:
-	//Poslednji parametar oznacava ko prvi igra
+	//Treci parametar oznacava ko prvi igra
 	Round(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj, Igrac& igrac, int& brojRunde);
+
 	//Funkcija radi tako sto trazenjem azurira pokazivace unutar rekurzije
 	void findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj,
 		int* pronadjenaVrednost, std::string* pronadjenIzraz);
@@ -40,8 +42,8 @@ public:
 	void setDobijeniBrojProg(int& br);
 	int getDobijeniBrojProg();
 
-	Igrac getPobednik();
-	void setPobednik(Igrac pob);
+	std::string getPobednik();
+	void setPobednik(std::string pob);
 
 private:
 	int brojRunde;
@@ -56,5 +58,5 @@ private:
 	std::string izrazProg;
 	int dobijeniBrojProg; //Broj koji je izracunao program
 
-	Igrac pobednik;
+	std::string pobednik;
 };

@@ -3,34 +3,30 @@
 #include <exception>
 #include <iostream>
 #include <sstream>
-//#include <vector>
+#include <type_traits>
 
-
+template <typename T>
 class Calculator {
 public:
 	Calculator();
-	double calculate(std::string izraz); //Racuna vrednost izraza iz 'ss'
+	T calculate(std::string izraz); //Racuna vrednost izraza iz 'ss'
 
 	//---------------- Formalna gramatika ----------------
-	double number(); //N -> realan broj
-	double primary(); //P -> moze biti N ili (E)
-	double term();
-	double expression(); //E
-
-	//Errori
-	friend void error(std::string error_type);
-	friend void error(std::string s, std::string s1);
+	T number(); //N -> realan broj
+	T primary(); //P -> moze biti N ili (E)
+	T term();
+	T expression(); //E
 
 protected:
 	//---------------- Unutrasnje klase ----------------
 	//Predstavlja broj ili operaciju
 	class Token {
 	public:
-		Token(char ch, double val);
+		Token(char ch, T val);
 		Token(char ch);
 		Token();
 		char kind;
-		double value;
+		T value;
 	};
 
 	//Niz Tokena
@@ -53,5 +49,5 @@ protected:
 	//---------------- Atributi ----------------
 	TokenStream ts;
 	std::istringstream ss; //Ovde smestam izraz koji racunam
-	double result;
+	T result;
 };

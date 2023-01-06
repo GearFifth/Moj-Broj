@@ -32,6 +32,7 @@ std::vector<Round> loadRoundsFromFile(std::string fileName)
 			cnt++;
 		}
 	}
+	myfile.close();
 	return runde;
 }
 
@@ -63,17 +64,7 @@ void writeRoundToFile(Round& runda, std::string fileName)
 	double dobijeniBrojA = runda.getDobijeniBrojA();
 	double dobijeniBrojB = runda.getDobijeniBrojB();
 	double dobijeniBrojProg = runda.getDobijeniBrojProg();
-	Igrac pobednik = runda.getPobednik();
-	std::string pobednikStr;
-	if (pobednik == A) {
-		pobednikStr = "A";
-	}
-	else if (pobednik == B) {
-		pobednikStr = "B";
-	}
-	else {
-		pobednikStr = "Nema pobednika";
-	}
+	std::string pobednik = runda.getPobednik();
 
 	if (myfile.is_open()) {
 #		//Iterira do kraja fajla
@@ -89,15 +80,42 @@ void writeRoundToFile(Round& runda, std::string fileName)
 		myfile << "Izraz igraca B: " << izrazB << std::endl;
 		myfile << "Dobijeni broj igraca B: " << dobijeniBrojB << std::endl;
 		myfile << "Razlika u odnosu na trazeni broj: " << abs(trazeniBroj - dobijeniBrojB) << std::endl;
-		myfile << "Pobednik: " << pobednikStr << std::endl;
+		myfile << "Pobednik: " << pobednik << std::endl;
 		myfile << "Izraz koji je pronasao racunar: " << izrazProg << std::endl;
 		myfile << "Dobijeni broj racunara: " << dobijeniBrojProg << std::endl << std::endl;
 
 	}
+	myfile.close();
+}
 
+void writeResultToFile(Game &game, std::string fileName) {
+
+	std::ofstream myfile(fileName, std::ios_base::app); //appendujem rezultat na kraju
+
+	int brojPobedaA = game.getBrojPobedaA();
+	int brojPobedaB = game.getBrojPobedaB();
+	if (myfile.is_open()) {
+		myfile << "---------- REZULTAT  ----------" << std::endl;
+		myfile << "Broj pobeda igraca A: " << brojPobedaA << std::endl;
+		myfile << "Broj pobeda igraca B: " << brojPobedaB << std::endl;
+
+		if (brojPobedaA > brojPobedaB) {
+
+			myfile << "Konacni pobednik je igrac A!" << std::endl;
+		}
+		else if (brojPobedaB > brojPobedaA) {
+			myfile << "Konacni pobednik je igrac B!" << std::endl;
+		}
+		else {
+			myfile << "NERESENO!" << std::endl;
+		}
+	}
+
+	myfile.close();
 }
 
 void clearOutFile(std::string fileName)
 {
 	std::ofstream myfile(fileName, std::ofstream::out | std::ofstream::trunc); //cistim fajl
+	myfile.close();
 }

@@ -30,9 +30,6 @@
     <ClCompile Include="round.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="expression.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="calculator.h">
@@ -47,15 +44,15 @@
     <ClInclude Include="round.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="expression.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="rezultati.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="..\..\..\..\Users\Ilija\Desktop\brojevi.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
