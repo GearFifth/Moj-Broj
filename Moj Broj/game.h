@@ -9,7 +9,7 @@
 
 class Game {
 public:
-	Game(std::vector<Round> &runde);
+	Game(std::vector<Round> &runde); //Konstruktor
 	void start(); //Pokrece igru
 	void dodajPobedu(Igrac igrac); //Dodaje pobedu igracu
 

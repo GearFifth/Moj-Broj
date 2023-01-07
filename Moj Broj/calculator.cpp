@@ -55,7 +55,7 @@ template <typename T> void Calculator<T>::TokenStream::putBack(Token token)
 
 
 //-------------------- KALKULATOR --------------------
-template <typename T> Calculator<T>::Calculator() :result(NULL), ss(), ts(*this) {} //konstruktor
+template <typename T> Calculator<T>::Calculator() :ss(), ts(*this) {} //konstruktor
 
 // ----- Formalna gramatika -----
 template <typename T> T Calculator<T>::number()

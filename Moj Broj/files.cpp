@@ -1,6 +1,6 @@
 ﻿#include "files.h"
 
-std::vector<Round> loadRoundsFromFile(std::string fileName)
+std::vector<Round> loadRoundsFromFile(std::string &fileName)
 {
 	std::vector<Round> runde;
 	std::vector<std::string> brojevi;
@@ -88,19 +88,16 @@ void writeRoundToFile(Round& runda, std::string fileName)
 	myfile.close();
 }
 
-void writeResultToFile(Game &game, std::string fileName) {
-
+void writeResultToFile(int& brojPobedaA, int& brojPobedaB, std::string fileName)
+{
 	std::ofstream myfile(fileName, std::ios_base::app); //appendujem rezultat na kraju
-
-	int brojPobedaA = game.getBrojPobedaA();
-	int brojPobedaB = game.getBrojPobedaB();
+	
 	if (myfile.is_open()) {
 		myfile << "---------- REZULTAT  ----------" << std::endl;
 		myfile << "Broj pobeda igraca A: " << brojPobedaA << std::endl;
 		myfile << "Broj pobeda igraca B: " << brojPobedaB << std::endl;
-
+	
 		if (brojPobedaA > brojPobedaB) {
-
 			myfile << "Konacni pobednik je igrac A!" << std::endl;
 		}
 		else if (brojPobedaB > brojPobedaA) {
@@ -110,7 +107,7 @@ void writeResultToFile(Game &game, std::string fileName) {
 			myfile << "NERESENO!" << std::endl;
 		}
 	}
-
+	
 	myfile.close();
 }
 

@@ -9,12 +9,15 @@ template <typename T>
 class Calculator {
 public:
 	Calculator();
-	T calculate(std::string izraz); //Racuna vrednost izraza iz 'ss'
+
+	//Racuna vrednost izraza iz 'ss'
+	//Baca exception invalid_argument u slucaju lose unetog izraza
+	T calculate(std::string izraz); 
 
 	//---------------- Formalna gramatika ----------------
 	T number(); //N -> realan broj
 	T primary(); //P -> moze biti N ili (E)
-	T term();
+	T term(); //množi,deli
 	T expression(); //E
 
 protected:
@@ -49,5 +52,4 @@ protected:
 	//---------------- Atributi ----------------
 	TokenStream ts;
 	std::istringstream ss; //Ovde smestam izraz koji racunam
-	T result;
 };

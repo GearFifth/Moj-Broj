@@ -9,14 +9,22 @@ enum Igrac { A, B };
 
 class Round {
 public:
-	//Treci parametar oznacava ko prvi igra
+	//3. parametar oznacava ko prvi igra
 	Round(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj, Igrac& igrac, int& brojRunde);
+	Round(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj);
 
 	//Funkcija radi tako sto trazenjem azurira pokazivace unutar rekurzije
+	//Parametri su sledeci
+	// 1 - brojevi pomocu kojih racunamo
+	// 2 - broj koji treba da dobijemo
+	// 3 - pokazivac na trenutnu najblizu vrednost resenja
+	// 4 - pokazivac na izraz trenutne najblize vrednosti
 	void findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj,
 		int* pronadjenaVrednost, std::string* pronadjenIzraz);
 
-	bool validateInput(std::string unos); //Proverava unos korisnika
+	//Proverava unos korisnika
+	//vraca true/false u slucaju dobrog/loseg unosa
+	bool validateInput(std::string unos); 
 
 	// ------------------ Getteri i setteri ------------------
 	int getBrojRunde();
@@ -58,5 +66,5 @@ private:
 	std::string izrazProg;
 	int dobijeniBrojProg; //Broj koji je izracunao program
 
-	std::string pobednik;
+	std::string pobednik; //Inicijalno postavljen na "Nema pobednika"
 };

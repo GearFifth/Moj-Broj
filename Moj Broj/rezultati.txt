@@ -1,12 +1,12 @@
 ---------- RUNDA 1 ----------
 Ponudjeni brojevi: 1 1 1 1 10 10 
 Trazeni broj: 106
-Izraz igraca A: 10*10+1+1+1+1
-Dobijeni broj igraca A: 104
-Razlika u odnosu na trazeni broj: 2
-Izraz igraca B: 10*10+1
-Dobijeni broj igraca B: 101
-Razlika u odnosu na trazeni broj: 5
+Izraz igraca A: 1
+Dobijeni broj igraca A: 1
+Razlika u odnosu na trazeni broj: 105
+Izraz igraca B: 1
+Dobijeni broj igraca B: 1
+Razlika u odnosu na trazeni broj: 105
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: ((1+10)*10)-(1+(1+1))
 Dobijeni broj racunara: 107
@@ -14,12 +14,12 @@ Dobijeni broj racunara: 107
 ---------- RUNDA 2 ----------
 Ponudjeni brojevi: 3 3 25 50 75 100 
 Trazeni broj: 996
-Izraz igraca A: 50*75
-Dobijeni broj igraca A: 3750
-Razlika u odnosu na trazeni broj: 2754
-Izraz igraca B: 50*3*3+100
-Dobijeni broj igraca B: 550
-Razlika u odnosu na trazeni broj: 446
+Izraz igraca A: 100*3*3+75+25
+Dobijeni broj igraca A: 1000
+Razlika u odnosu na trazeni broj: 4
+Izraz igraca B: 25*50
+Dobijeni broj igraca B: 1250
+Razlika u odnosu na trazeni broj: 254
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: ((3+((3+50)*25))*75)/100
 Dobijeni broj racunara: 996
@@ -27,12 +27,12 @@ Dobijeni broj racunara: 996
 ---------- RUNDA 3 ----------
 Ponudjeni brojevi: 1 2 3 4 25 75 
 Trazeni broj: 755
-Izraz igraca A: 2*75*4-25
-Dobijeni broj igraca A: 575
-Razlika u odnosu na trazeni broj: 180
-Izraz igraca B: 1+2+3
-Dobijeni broj igraca B: 6
-Razlika u odnosu na trazeni broj: 749
+Izraz igraca A: 75
+Dobijeni broj igraca A: 75
+Razlika u odnosu na trazeni broj: 680
+Izraz igraca B: 2
+Dobijeni broj igraca B: 2
+Razlika u odnosu na trazeni broj: 753
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: ((3+75)*((1+4)*2))-25
 Dobijeni broj racunara: 755
@@ -43,9 +43,9 @@ Trazeni broj: 289
 Izraz igraca A: 10
 Dobijeni broj igraca A: 10
 Razlika u odnosu na trazeni broj: 279
-Izraz igraca B: 75
-Dobijeni broj igraca B: 75
-Razlika u odnosu na trazeni broj: 214
+Izraz igraca B: 1
+Dobijeni broj igraca B: 1
+Razlika u odnosu na trazeni broj: 288
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: ((75-(8+9))*10)/(1+1)
 Dobijeni broj racunara: 290
@@ -53,12 +53,12 @@ Dobijeni broj racunara: 290
 ---------- RUNDA 5 ----------
 Ponudjeni brojevi: 9 7 5 1 10 75 
 Trazeni broj: 538
-Izraz igraca A: 10*5
-Dobijeni broj igraca A: 50
-Razlika u odnosu na trazeni broj: 488
-Izraz igraca B: 75*10-9*7
-Dobijeni broj igraca B: 687
-Razlika u odnosu na trazeni broj: 149
+Izraz igraca A: 10
+Dobijeni broj igraca A: 10
+Razlika u odnosu na trazeni broj: 528
+Izraz igraca B: 75
+Dobijeni broj igraca B: 75
+Razlika u odnosu na trazeni broj: 463
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: (75*7)+((9+5)-1)
 Dobijeni broj racunara: 538
@@ -66,12 +66,12 @@ Dobijeni broj racunara: 538
 ---------- RUNDA 6 ----------
 Ponudjeni brojevi: 5 4 7 5 10 100 
 Trazeni broj: 986
-Izraz igraca A: 5
-Dobijeni broj igraca A: 5
-Razlika u odnosu na trazeni broj: 981
-Izraz igraca B: 10
-Dobijeni broj igraca B: 10
+Izraz igraca A: 10
+Dobijeni broj igraca A: 10
 Razlika u odnosu na trazeni broj: 976
+Izraz igraca B: 100
+Dobijeni broj igraca B: 100
+Razlika u odnosu na trazeni broj: 886
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: (100*10)-(5+(5+4))
 Dobijeni broj racunara: 986
@@ -79,12 +79,12 @@ Dobijeni broj racunara: 986
 ---------- RUNDA 7 ----------
 Ponudjeni brojevi: 2 9 2 8 15 50 
 Trazeni broj: 513
-Izraz igraca A: 50
-Dobijeni broj igraca A: 50
-Razlika u odnosu na trazeni broj: 463
-Izraz igraca B: 2
-Dobijeni broj igraca B: 2
+Izraz igraca A: 2
+Dobijeni broj igraca A: 2
 Razlika u odnosu na trazeni broj: 511
+Izraz igraca B: 8
+Dobijeni broj igraca B: 8
+Razlika u odnosu na trazeni broj: 505
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: ((50-2)*(2+9))-15
 Dobijeni broj racunara: 513
@@ -92,12 +92,12 @@ Dobijeni broj racunara: 513
 ---------- RUNDA 8 ----------
 Ponudjeni brojevi: 4 6 5 2 15 75 
 Trazeni broj: 832
-Izraz igraca A: 15
-Dobijeni broj igraca A: 15
-Razlika u odnosu na trazeni broj: 817
-Izraz igraca B: 75
-Dobijeni broj igraca B: 75
+Izraz igraca A: 75
+Dobijeni broj igraca A: 75
 Razlika u odnosu na trazeni broj: 757
+Izraz igraca B: 15
+Dobijeni broj igraca B: 15
+Razlika u odnosu na trazeni broj: 817
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: (75-(6+5))*(15-(4-2))
 Dobijeni broj racunara: 832
@@ -105,12 +105,12 @@ Dobijeni broj racunara: 832
 ---------- RUNDA 9 ----------
 Ponudjeni brojevi: 6 8 8 9 15 75 
 Trazeni broj: 256
-Izraz igraca A: 75
-Dobijeni broj igraca A: 75
-Razlika u odnosu na trazeni broj: 181
-Izraz igraca B: 15
-Dobijeni broj igraca B: 15
-Razlika u odnosu na trazeni broj: 241
+Izraz igraca A: 6*8
+Dobijeni broj igraca A: 48
+Razlika u odnosu na trazeni broj: 208
+Izraz igraca B: 9*15
+Dobijeni broj igraca B: 135
+Razlika u odnosu na trazeni broj: 121
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: ((8+15)*(6+8))-(75-9)
 Dobijeni broj racunara: 256
@@ -118,12 +118,12 @@ Dobijeni broj racunara: 256
 ---------- RUNDA 10 ----------
 Ponudjeni brojevi: 6 9 8 7 15 100 
 Trazeni broj: 696
-Izraz igraca A: 100
-Dobijeni broj igraca A: 100
-Razlika u odnosu na trazeni broj: 596
-Izraz igraca B: 15
-Dobijeni broj igraca B: 15
-Razlika u odnosu na trazeni broj: 681
+Izraz igraca A: 9*6
+Dobijeni broj igraca A: 54
+Razlika u odnosu na trazeni broj: 642
+Izraz igraca B: 100*15
+Dobijeni broj igraca B: 1500
+Razlika u odnosu na trazeni broj: 804
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: (100*7)-((15-8)-(9-6))
 Dobijeni broj racunara: 696
@@ -131,12 +131,12 @@ Dobijeni broj racunara: 696
 ---------- RUNDA 11 ----------
 Ponudjeni brojevi: 2 8 8 9 15 50 
 Trazeni broj: 299
-Izraz igraca A: 50
-Dobijeni broj igraca A: 50
-Razlika u odnosu na trazeni broj: 249
-Izraz igraca B: 15
-Dobijeni broj igraca B: 15
-Razlika u odnosu na trazeni broj: 284
+Izraz igraca A: 2
+Dobijeni broj igraca A: 2
+Razlika u odnosu na trazeni broj: 297
+Izraz igraca B: 8
+Dobijeni broj igraca B: 8
+Razlika u odnosu na trazeni broj: 291
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: 9+((15-(2+8))*(8+50))
 Dobijeni broj racunara: 299
@@ -144,12 +144,12 @@ Dobijeni broj racunara: 299
 ---------- RUNDA 12 ----------
 Ponudjeni brojevi: 6 7 1 3 10 75 
 Trazeni broj: 995
-Izraz igraca A: 6
-Dobijeni broj igraca A: 6
-Razlika u odnosu na trazeni broj: 989
-Izraz igraca B: 7
-Dobijeni broj igraca B: 7
-Razlika u odnosu na trazeni broj: 988
+Izraz igraca A: 75
+Dobijeni broj igraca A: 75
+Razlika u odnosu na trazeni broj: 920
+Izraz igraca B: 10
+Dobijeni broj igraca B: 10
+Razlika u odnosu na trazeni broj: 985
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: ((3-1)*10)+((6+7)*75)
 Dobijeni broj racunara: 995
@@ -157,13 +157,17 @@ Dobijeni broj racunara: 995
 ---------- RUNDA 13 ----------
 Ponudjeni brojevi: 3 1 2 6 10 25 
 Trazeni broj: 907
-Izraz igraca A: 25
-Dobijeni broj igraca A: 25
+Izraz igraca A: (3+6+1)*10-2
+Dobijeni broj igraca A: 98
+Razlika u odnosu na trazeni broj: 809
+Izraz igraca B: 25
+Dobijeni broj igraca B: 25
 Razlika u odnosu na trazeni broj: 882
-Izraz igraca B: 10
-Dobijeni broj igraca B: 10
-Razlika u odnosu na trazeni broj: 897
 Pobednik: Nema pobednika
 Izraz koji je pronasao racunar: (1+6)+((2+10)*(25*3))
 Dobijeni broj racunara: 907
 
+---------- REZULTAT  ----------
+Broj pobeda igraca A: 0
+Broj pobeda igraca B: 0
+NERESENO!

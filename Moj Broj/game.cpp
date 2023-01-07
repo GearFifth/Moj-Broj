@@ -44,7 +44,7 @@ int Game::getBrojPobedaB()
 void Game::start()
 {
 	std::vector<Round>::iterator iterRunde;
-	Calculator calc = Calculator<int>();
+	Calculator<int> calc = Calculator<int>();
 
 	for (iterRunde = runde.begin(); iterRunde != runde.end(); iterRunde++) {
 
@@ -72,7 +72,7 @@ void Game::start()
 
 		// ------------------------- Igraci na potezu -------------------------
 		std::string unosIgraca; //Izraz koji je uneo igrac
-		std::string igracStr;
+		std::string igracStr; //pomocni string koji predstavlja igraca
 
 		for (int i = 0; i < 2; i++) {	
 			if (igracNaPotezu == B) {
@@ -85,7 +85,7 @@ void Game::start()
 			int rez;
 			while (true) {
 				std::cout << "Igrac " << igracStr << " unosi resenje: ";
-				std::cin >> unosIgraca;
+				std::getline(std::cin, unosIgraca);
 
 				//Proveravam da li je korisnik vise puta uneo broj ili je uneo neki broj koji ne postoji
 				if (!trenutnaRunda.validateInput(unosIgraca)) {
@@ -95,8 +95,7 @@ void Game::start()
 
 				try {
 					rez = calc.calculate(unosIgraca + ";q");
-					if (igracNaPotezu == B) {
-
+					if (igracNaPotezu == A) {
 						trenutnaRunda.setDobijeniBrojA(rez);
 						trenutnaRunda.setIzrazA(unosIgraca);
 					}
@@ -110,6 +109,8 @@ void Game::start()
 						std::cout << "POBEDNIK IGRAC " << igracStr << "!" << std::endl;
 						trenutnaRunda.setPobednik(igracStr);
 						dodajPobedu(igracNaPotezu);
+						i++;
+						break;
 					}
 					else {
 						break;
@@ -121,11 +122,17 @@ void Game::start()
 				}
 			}
 
-			igracNaPotezu = static_cast<Igrac>(igracNaPotezu + 1); //Naredni igrac
+			//Naredni igrac
+			if (igracNaPotezu == A) {
+				igracNaPotezu = B;
+			}
+			else {
+				igracNaPotezu = A;
+			}
 		}
 		
-
 		// ------------------------- Racunanje programa -------------------------
+		std::cout << "Program racuna..." << std::endl;
 		//Racunanje vremena trazenja rezultata
 		auto start = std::chrono::high_resolution_clock::now();
 		trenutnaRunda.findSolution(ponudjeniBrojevi, trazeniBroj, &pronadjenaVrednost, &pronadjenIzraz);
@@ -149,13 +156,14 @@ void Game::start()
 			//Razlika do tacnog broja
 			int progDiff = abs(pronadjenaVrednost - trazeniBroj);
 			int igracADiff = abs(trenutnaRunda.getDobijeniBrojA() - trazeniBroj);
-			int igracBDiff = abs(trenutnaRunda.getDobijeniBrojA() - trazeniBroj);
+			int igracBDiff = abs(trenutnaRunda.getDobijeniBrojB() - trazeniBroj);
 			if (trenutnaRunda.getPrviIgracNaPotezu() == A) {
 				if (igracADiff == progDiff) {
 					std::cout << "POBEDNIK IGRAC A!" << std::endl;
 					trenutnaRunda.setPobednik("A");
 					dodajPobedu(A);
-				} else if (igracBDiff == progDiff) {
+				}
+				else if (igracBDiff == progDiff) {
 					std::cout << "POBEDNIK IGRAC B!" << std::endl;
 					trenutnaRunda.setPobednik("B");
 					dodajPobedu(B);
@@ -164,7 +172,7 @@ void Game::start()
 					std::cout << "NIJEDAN IGRAC NIJE POBEDIO!" << std::endl;
 				}
 			}
-			else if(trenutnaRunda.getPrviIgracNaPotezu() == B) {
+			else if (trenutnaRunda.getPrviIgracNaPotezu() == B) {
 				if (igracBDiff == progDiff) {
 					std::cout << "POBEDNIK IGRAC B!" << std::endl;
 					trenutnaRunda.setPobednik("B");
@@ -180,6 +188,7 @@ void Game::start()
 				}
 			}
 		}
+		
 
 		//Ispis podataka o rundi u output fajl
 		writeRoundToFile(trenutnaRunda, "rezultati.txt");
@@ -188,7 +197,8 @@ void Game::start()
 	}
 
 	//Ispis rezultata u output fajl
-	writeResultToFile(*this, "rezultati.txt");
+	writeResultToFile(brojPobedaA, brojPobedaB, "rezultati.txt"); 
+
 
 	if (brojPobedaA > brojPobedaB) {
 		std::cout << "KONACNI POBEDNIK JE IGRAC A!" << std::endl;

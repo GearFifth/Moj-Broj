@@ -1,10 +1,13 @@
 #include "round.h"
 
-//Konstruktor
+//Konstruktori
 Round::Round(std::vector<std::string>& ponudjeniBrojevi, int &trazeniBroj, Igrac &igrac, int &br):
 	ponudjeniBrojevi(ponudjeniBrojevi), trazeniBroj(trazeniBroj), prviIgracNaPotezu(igrac),
 	brojRunde(br), dobijeniBrojA(0), dobijeniBrojB(0), dobijeniBrojProg(0), pobednik("Nema pobednika") {}
 
+Round::Round(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj) :
+	ponudjeniBrojevi(ponudjeniBrojevi), trazeniBroj(trazeniBroj), prviIgracNaPotezu(A),
+	brojRunde(1), dobijeniBrojA(0), dobijeniBrojB(0), dobijeniBrojProg(0), pobednik("Nema pobednika") {}
 
 
 // --------------------- Getteri i setteri ---------------------
@@ -113,14 +116,14 @@ void Round::setPobednik(std::string pob)
 //Funkcija radi tako sto trazenjem azurira pokazivace unutar rekurzije
 void Round::findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazeniBroj, int* pronadjenaVrednost, std::string* pronadjenIzraz) {
 
-	Calculator calc = Calculator<double>();
+	Calculator<double> calc = Calculator<double>();
 	int velicina = ponudjeniBrojevi.size();
 
 	//Pravim kombinacije i pozivam dok ne dodjem do nekog od navedenih slucajeva
 	//Uslovi za izlaz iz rekurzije
 	if (pronadjenIzraz->size() != 0) {
 		//Ukoliko je pronadjen izraz izlazimo iz rekurzije
-		if (calc.calculate(*pronadjenIzraz + ";q") == trazeniBroj) {
+		if (*pronadjenaVrednost == trazeniBroj) {
 			return;
 		}
 	}
@@ -191,6 +194,7 @@ void Round::findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazen
 					//Postavljam resenje
 					*pronadjenaVrednost = num;
 					*pronadjenIzraz = newExpr;
+					return;
 				}
 				//Trazimo najpriblizniji broj
 				else if (abs(num - trazeniBroj) < abs(*pronadjenaVrednost - trazeniBroj)) {
@@ -207,16 +211,6 @@ void Round::findSolution(std::vector<std::string>& ponudjeniBrojevi, int& trazen
 				noviNiz.push_back("(" + newExpr + ")"); //Smestam novi izraz obgrljen zagradama na kraju
 				noviNiz.erase(noviNiz.begin() + (iter1-ponudjeniBrojevi.begin())); //Brisem e1
 				noviNiz.erase(noviNiz.begin() + (iter2 - ponudjeniBrojevi.begin()) -1); //Brisem e2 (ide -1 posto je sad prvi obrisan)
-
-				// ------------------- V2 --------------------
-				/*std::vector<std::string> noviNiz;
-				noviNiz.push_back("(" + newExpr + ")");
-				for (iter3 = ponudjeniBrojevi.begin(); iter3 != ponudjeniBrojevi.end(); iter3++) {
-					if (*iter3 == e1 || *iter3 == e2) {
-						continue;
-					}
-					noviNiz.push_back(*iter3);
-				}*/
 
 				//2. trazimo resenje pomocu izmenjenog niza brojeva
 				findSolution(noviNiz, trazeniBroj, pronadjenaVrednost, pronadjenIzraz);
